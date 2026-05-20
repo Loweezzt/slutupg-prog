@@ -1,13 +1,43 @@
-namn = input("Vad ska ditt husdjur heta? ")
-health = 100
-happiness = 30
-hunger = 50
-mess = 0
-age = 1
+import random
 
-actions = ["discipline", "feed", "play", "pet", "clean"]
+class Tamagotchi:
+    def __init__(self, namn):
+        self.namn = namn
+        
+        self.health = 100
+        self.happiness = 50
+        self.hunger = 30
+        self.mess = 0
+        self.age = 1
+        self.weight = 5
+    
+        self.sick = False
+        self.fat = False
+        self.depressed = False
+    
+        self.actions = [
+            "eat", "play", "pet", "clean", "discipline", "medicine"
+        ]
 
-print(f"\nVälkommen! Ta hand om {namn} väl.")
+print("=" * 35)
+print(f"Status för {self.namn()}")
+print("=" * 35)
+
+print(f"hälsa:   {self.health}/100")
+print(f"glädje:  {self.happiness}/100")
+print(f"hunger:  {self.hunger}/100")
+print(f"smuts:   {self.mess}/5")
+print(f"ålder:   {self.age} år")
+print(f"vikt:    {self.weight} kg")
+
+if self.age < 10:
+    print("Stadie: Unge")
+
+elif self.age < 20:
+    print("Stadie: Tonåring")
+
+
+
 
 while health > 0:
 

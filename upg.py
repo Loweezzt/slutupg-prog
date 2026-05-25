@@ -13,83 +13,128 @@ class Tamagotchi:
     
         self.sick = False
         self.fat = False
-        self.depressed = False
     
         self.actions = [
             "eat", "play", "pet", "clean", "discipline", "medicine"
         ]
+    def show_status(self):
+        print("=" * 35)
+        print(f"Status för {self.namn}")
+        print("=" * 35)
 
-print("=" * 35)
-print(f"Status för {self.namn()}")
-print("=" * 35)
+        print(f"hälsa:   {self.health}/100")
+        print(f"glädje:  {self.happiness}/100")
+        print(f"hunger:  {self.hunger}/100")
+        print(f"smuts:   {self.mess}/5")
+        print(f"ålder:   {self.age} år")
+        print(f"vikt:    {self.weight} kg")
+        if self.age < 10:
+            print("Stadie: Unge")
 
-print(f"hälsa:   {self.health}/100")
-print(f"glädje:  {self.happiness}/100")
-print(f"hunger:  {self.hunger}/100")
-print(f"smuts:   {self.mess}/5")
-print(f"ålder:   {self.age} år")
-print(f"vikt:    {self.weight} kg")
-
-if self.age < 10:
-    print("Stadie: Unge")
-
-elif self.age < 20:
-    print("Stadie: Tonåring")
-
+        elif self.age < 20:
+            print("Stadie: Tonåring")
 
 
-
-while health > 0:
-
-    # 1. STATUS
-    print("\n" + "-"*30)
-    print(f"STATUS FÖR {namn.upper()}:")
-    print(f"Hälsa:  {health}/100")
-    print(f"Glädje: {happiness}/100")
-    # ... + alla andra stats
-    print("-" * 30)
-
-    # 2. TIDEN GÅR
-    # Varje runda blir djuret lite hungrigare och tråkigare (surare, ledsnare, deppigare)?
-    hunger += 10
-    happiness -= 5
+    def nästa_del(self):
     
-    # 3. KONSEKVENSER 
-    # UPPDRAG 1: Skriv if-satser som straffar djuret om värdena är för dåliga!
-    # Till exempel: Om hunger är över 80, sänk health med 10.
-    # Om smuts (mess) är över 3, sänk health med 5, och / eller gör djuret sjukt (kan inte äta).
+        self.age += 1
+        self.hunger += 10
+        self.happiness -= 5
 
-    # Kolla om djuret dog av konsekvenserna innan vi går vidare (alltså, hur vågar du)
-    if health <= 0:
-        break # Avbryter loopen direkt!
-
-    # 4. SPELARENS VAL
-    print("\nVad vill du göra?")
+        if self.hunger > 80:
+            self.health -= 10
+            print(f"{self.namn} svälter!")
     
-    # UPPDRAG 2: Använd en for-loop för att skriva ut listan 'actions' snyggt
-    print(f"Alternativ: {actions}") # Fixa
+        if self.mess > 3:
+            self.sick = True
+            print(f"{self.namn} blev sjuk av all skit!")
 
-    val = input("Skriv vad du vill göra: ").lower()
-
-    # 5. UTFÖR 
-    # UPPDRAG 3: Ändra variablerna beroende på spelarens val!
+        if self.weight > 20:
+            self.sick = True
+            print(f"{self.namn} har blivit för tjock!")
     
-    if val == "feed":
-        print(f"Du matar {namn}.")
-        hunger -= 30
-        mess += 1
-        # OBS: Se till att hunger inte går under 0! (Använd if-sats)
-        
-    elif val == "play":
-        print(f"Du leker med {namn}!")
-        # Vad ska hända med glädje och hunger här?
-        
-    # Här skriver du resten av logiken för djurets beteende
-        
-    else:
-        print("Ogiltigt val! Djuret tittar förvirrat på dig och tiden går...")
+        if self.sick:
+            self.health -= 15
+        else:
+            self.health -= 5
 
-# --- GAME OVER ---
-print("\n" + "="*30)
-print(f"GAME OVER. {namn} blev {age} år, men har nu dött eller rymt.")
-print("="*30)
+    def eat(self):
+        if self.sick:
+            print(f"{self.namn} är sjuk och kan inte äta!")
+            return
+        
+        print(f"Du matar {self.namn}.")
+        self.hunger -= 30
+        self.mess += 1
+        self.weight += 2
+
+    def play(self):
+        print(f"Du leker med {self.namn}!")
+        self.happiness += 20
+        self.hunger += 15
+        self.weight -= 1
+
+    def pet(self):
+        print(f"Du klappar {self.namn}.")
+        self.happiness += 10
+
+    def clean(self):
+        print(f"Du städar efter {self.namn}.")
+        self.mess = 0
+        if self.sick:
+            self.sick = False
+            print(f"{self.namn} blev frisk av att bli ren!")
+
+    def discipline(self):
+        print(f"Du disciplinerar {self.namn}.")
+        self.happiness -= 15
+        self.health -= 5
+
+    def medicine(self):
+        if self.sick:
+            print(f"Du ger medicin till {self.namn}.")
+            self.sick = False
+            self.health += 20
+        else:
+            print(f"{self.namn} är inte sjuk och vägrar ta medicin!")
+
+    def do_action(self, action):
+        if action == "eat":
+            self.eat()
+        elif action == "play":
+            self.play()
+        elif action == "pet":
+            self.pet()
+        elif action == "clean":
+            self.clean()
+        elif action == "discipline":
+            self.discipline()
+        elif action == "medicine":
+            self.medicine()
+        else:
+            print("Ogiltigt val!")
+
+
+namn = input("Vad vill du döpa ditt husdjur till? ")
+husdjur = Tamagotchi(namn)
+print(f"Du har skapat {namn}!")
+
+husdjur.show_status()
+
+husdjur.nästa_del()
+
+if husdjur.health <= 0:
+    print(f"{namn} har dött av dålig hälsa...")
+
+
+print("\nVad vill du göra?")
+for action in husdjur.actions:
+    print(f"- {action}")
+    
+val = input("Skriv vad du vill göra: ").lower()
+husdjur.do_action(val)
+
+if husdjur.health <= 0:
+    print("\n" + "="*30)
+    print("GAME OVER")
+    print(f"{husdjur.namn} blev {husdjur.age} år, men har nu dött.")

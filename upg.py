@@ -115,26 +115,26 @@ class Tamagotchi:
             print("Ogiltigt val!")
 
 
+
 namn = input("Vad vill du döpa ditt husdjur till? ")
 husdjur = Tamagotchi(namn)
 print(f"Du har skapat {namn}!")
 
-husdjur.show_status()
+while husdjur.health > 0:
+    husdjur.show_status()
+    husdjur.nästa_del()
 
-husdjur.nästa_del()
-
-if husdjur.health <= 0:
-    print(f"{namn} har dött av dålig hälsa...")
+    if husdjur.health <= 0:
+        print(f"{namn} har dött av dålig hälsa...")
 
 
-print("\nVad vill du göra?")
-for action in husdjur.actions:
-    print(f"- {action}")
+    print("\nVad vill du göra?")
+    for action in husdjur.actions:
+        print(f"- {action}")
     
-val = input("Skriv vad du vill göra: ").lower()
-husdjur.do_action(val)
+    val = input("Skriv vad du vill göra: ").lower()
+    husdjur.do_action(val)
 
-if husdjur.health <= 0:
-    print("\n" + "="*30)
-    print("GAME OVER")
-    print(f"{husdjur.namn} blev {husdjur.age} år, men har nu dött.")
+print("\n" + "="*30)
+print("GAME OVER")
+print(f"{husdjur.namn} blev {husdjur.age} år, men har nu dött.")

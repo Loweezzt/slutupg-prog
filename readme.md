@@ -15,7 +15,14 @@ Så jag inte bara blint tar kod utan att veta vad det är.
 Nu funkar koden hyfsat (det blir inte ett fel medellande direkt.) men det som fortfarande behöver fixas är en whileloop.
 Som göra så att efter jag "matat" kan jag göra något mer efter. Istället för att den dör eller inte låter mig skriva.
 
-ONS 07/25
+ONS 07/27
 Nu läser jag på Jens hemsida och försöker lära mig hur jag ska försätta, vart och hur jag ska sätta in loopen.
 Nu funkar den precis som jag vill.
 Jag la till whileloop, och fixade indrag så löstes allting.
+
+Sammanfattningsvis:
+Jag tyckte det var svårt och jag behövde hjälp från både, Jens, google och chatten. 
+Men tillslut förstod jag vad jag behövde göra och vad som felen var. 
+Tyckte det gick bra och fick någonting bra gjort. 
+Jag hoppas att detta räcker till ett godkänt betyg annars skulle jag gärna komplettera/lägga till något mer.
+Eller visa på något annat sätt. 
